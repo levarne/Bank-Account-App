@@ -1,0 +1,41 @@
+.acme-heading {
+  color: #d50034;
+}
+
+.withdrawDropDown {
+  button {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.02rem;
+  }
+
+  .dropdown-toggle::after {
+    display:none;
+  }
+
+  .ng-invalid:not(form)  {
+    border: 1px solid red;
+
+    &:focus {
+      outline:0 !important;
+      -webkit-appearance:none;
+    }
+  }
+}
+
+.table.acme-accountlist {
+  thead th {
+    border-bottom: none;
+  }
+
+  tbody td {
+    padding: 0.55rem;
+    vertical-align: middle;
+  }
+
+  tfoot tr td {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+}
+

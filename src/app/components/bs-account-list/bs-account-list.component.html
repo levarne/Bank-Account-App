@@ -1,0 +1,54 @@
+<div class="m-4 bg-white rounded shadow">
+  <div class="p-3">
+    <h4 class="acme-heading mb-0">Account List</h4>
+  </div>
+  <table class="acme-accountlist table table-striped">
+    <thead>
+    <tr>
+      <th scope="col p-2">Account Number</th>
+      <th scope="col">Account Type</th>
+      <th scope="col">Balance</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let account of accounts">
+      <td>{{account.number}}</td>
+      <td>{{account.type}}</td>
+      <td>{{account.balance | currency:'ZAR' | space:3}}</td>
+      <td>
+        <!--Make a component-->
+        <div class="d-inline-block withdrawDropDown" ngbDropdown>
+          <button type="button"
+                  class="btn btn-success mr-2"
+                  ngbDropdownToggle
+                  [disabled]="account.balance <= account.minBalance">
+            Withdraw
+          </button>
+          <div ngbDropdownMenu class="px-2">
+            <input  type="number" placeholder="0" #withdrawAmount
+                    [ngClass]="{'ng-invalid': (account.balance - withdrawAmount.value) < account.minBalance}"
+                    (change)="0"
+                    (keyup)="0"
+            />
+            <button
+              class="btn-block mt-1"
+              (click)="withDraw(account, withdrawAmount.value);withdrawAmount.value=''"
+              (keydown)="withDraw(account, withdrawAmount.value);withdrawAmount.value=''"
+              [disabled]="withdrawAmount.value <= 0"
+            >OK</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>Balance</td>
+        <td></td>
+        <td>{{totalACMEBalance | currency:'ZAR' | space:3}}</td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

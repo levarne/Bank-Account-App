@@ -1,0 +1,17 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+.acme-nav {
+  $start-color: #d70032;
+  $end-color: #690031;
+  @include gradient-x($start-color, $end-color, 0%, 100%);
+
+  .navbar-brand {
+    font-size: 1.15rem;
+
+    @include media-breakpoint-up(sm) {
+      margin-left: -0.9em;
+    }
+  }
+}

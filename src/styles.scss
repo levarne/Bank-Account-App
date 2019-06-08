@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  background-color: rgba(0, 0, 0, 0.05);
+
+  .container {
+    min-width: 562px;
+  }
+}
+
+.btn.dropdown-toggle {
+  &:disabled {
+    color: inherit;
+    background-color: #fff;
+    border-color: rgba(0, 0, 0, 0.19);
+  }
+}
