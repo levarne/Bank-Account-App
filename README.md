@@ -5,7 +5,7 @@
 ### Clone Repository
 
 ```sh 
-$ git clone git@bitbucket.org:levarnesobotker/acme-bank.git
+$ git clone git@github.com:levarne/ACME-Bank.git
 ```
 
 ### Install Dependencies
