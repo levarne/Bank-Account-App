@@ -25,4 +25,10 @@ This configuration includes dev logs, production logs are disabled in evironment
 http://localhost:4200/
 ```
 
+## NB - this app depeneds on the below express service
+### Run Server
+``` nodejs
+https://github.com/cibfrontend/mock-api-server
+```
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
