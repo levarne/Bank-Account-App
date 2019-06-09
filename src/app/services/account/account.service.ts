@@ -1,9 +1,10 @@
+import { from, Observable, of } from 'rxjs'
+import { catchError, tap } from 'rxjs/operators'
 import { Injectable } from '@angular/core'
-import { ACMEAccount } from '../../lib/types/model/ACMEAccount'
-import { catchError, map, tap } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
+import { ACMEAccount } from '../../lib/types/model/ACMEAccount'
 import { LoggerService } from '../logger/logger.service'
-import { from, Observable, of, throwError } from 'rxjs'
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ import { from, Observable, of, throwError } from 'rxjs'
  * Service responsible for  managing accounts
  */
 export class AccountService {
-  accountsUrl = 'http://localhost:8080/api/accounts' // ToDO get from config
+  classname = 'AccountService'
+  accountsUrl = environment.accountService.host
 
   constructor (private http: HttpClient, private logger: LoggerService) {}
 
@@ -23,7 +25,7 @@ export class AccountService {
   setBalance (account: ACMEAccount, withDrawAmount: number): Observable<any> {
     return from([1])
       .pipe(
-        tap(_ => this.logger.debug(`Account balance ${withDrawAmount} updated successfully :: `, account)),
+        tap(_ => this.logger.debug(this.classname, `Amount withdrawn successfully.`, account)),
         catchError(this.handleError<Array<ACMEAccount>>('getAccounts', []))
       )
   }
@@ -34,14 +36,10 @@ export class AccountService {
   getAccounts (): Observable<Array<ACMEAccount>> {
     return this.http.get<Array<ACMEAccount>>(this.accountsUrl)
       .pipe(
-        tap(accounts => this.logger.debug('Fetched accounts successful :: ', accounts)),
+        tap(accounts => this.logger.debug(this.classname,'Fetched accounts successfully.', accounts)),
         catchError(this.handleError<Array<ACMEAccount>>('getAccounts', []))
       )
   }
-
-  /**
-   * Get a single account
-   */
 
   /**
    * Handle Http operation that failed.
@@ -49,8 +47,7 @@ export class AccountService {
    */
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      this.logger.error(`${operation} failed: ${error.message}`)
+      this.logger.error(this.classname,`${operation} failed: ${error.message}`)
 
       // Let the app keep running by returning an empty result.
       return of(result as T)

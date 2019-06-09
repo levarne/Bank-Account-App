@@ -1,5 +1,6 @@
 import { ACMEAccount } from '../types/model/ACMEAccount'
 import { canWithDraw } from '../helpers/AccountHelpers'
+import { UnableToWithdrawFundsError } from '../errors/UnableToWithdrawFundsError'
 
 /**
  * Represents a Cheque account
@@ -27,7 +28,7 @@ class ChequeAccount<T> implements ACMEAccount {
       return true
     }
 
-    return false
+    throw new UnableToWithdrawFundsError()
   }
 }
 

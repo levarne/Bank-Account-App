@@ -3,8 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
-};
+  production: false,
+  log: { level: 'TRACE' },
+  accountService: {
+    host: 'http://localhost:8080/api/accounts'
+  }
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

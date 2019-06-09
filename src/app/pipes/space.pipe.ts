@@ -4,6 +4,9 @@ import { Pipe, PipeTransform } from '@angular/core'
   name: 'space'
 })
 
+/**
+ * Responsible for adding spacing after a predefined value
+ */
 class SpacePipe implements PipeTransform {
   transform (value: any, startSpace?: any): any {
     const spaceAt: number = value.indexOf('-') === 0 ? (startSpace + 1) : startSpace

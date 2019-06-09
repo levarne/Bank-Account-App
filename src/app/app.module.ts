@@ -14,19 +14,22 @@ import { AccountFactory } from './lib/factories/AccountFactory'
 import { AccountService } from './services/account/account.service'
 import { LoggerService } from './services/logger/logger.service'
 import { MessageService } from './services/message.service'
+import { BsAccountWithDrawDropDownComponent } from './components/bs-account-with-draw-drop-down/bs-account-with-draw-drop-down.component'
+import { environment } from '../environments/environment'
 
 @NgModule({
   declarations: [
     AppComponent,
     BsAccountListComponent,
-    SpacePipe
+    SpacePipe,
+    BsAccountWithDrawDropDownComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BootstrapModule,
     HttpClientModule,
-    LoggerModule.forRoot({ level: NgxLoggerLevel.DEBUG }),
+    LoggerModule.forRoot({ level: NgxLoggerLevel[environment.log.level] }),
     FormsModule
   ],
   providers: [

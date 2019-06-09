@@ -16,6 +16,8 @@ import { MessageService } from '../../services/message.service'
  * Render a list of Accounts
  */
 export class BsAccountListComponent implements OnInit {
+  classname = 'BsAccountListComponent'
+
   accounts: Array<ACMEAccount>
   totalACMEBalance: number = 0
 
@@ -29,6 +31,7 @@ export class BsAccountListComponent implements OnInit {
    * Get list of observable accounts
    */
   getAccounts (): void {
+    this.logger.debug(this.classname,'Fetching accounts for ACME account list.')
     this.accountService.getAccounts()
       .pipe(
         map(accounts => accounts.map(account => AccountFactory.getAccountByType(account['account_type'], account)))
@@ -38,17 +41,29 @@ export class BsAccountListComponent implements OnInit {
       })
   }
 
-  withDraw (account: ACMEAccount, withdrawAmount: string): void {
+  /**
+   * withDraw triggered by an event from app-bs-account-with-draw-drop-down
+   */
+  withDraw ({ account, withdrawAmount }: {account: ACMEAccount, withdrawAmount: string}): void {
     const amount = -withdrawAmount
 
+    this.logger.debug(this.classname, `Withdraw from ${account.number}, an amount of ${withdrawAmount}`, account)
     this.accountService.setBalance(account, amount)
       .subscribe(async () => {
-        if (account.setBalance(amount)) this.messageService.apply('Success')
+        try {
+          if (account.setBalance(amount)) this.messageService.apply('Success')
+        } catch (error) {
+          this.logger.error(this.classname, `errorType: ${error.constructor.name} - message: ${error.message}`, account)
+          this.messageService.apply(error.message)
+        }
 
         this.updateTotalACMEBalance()
       })
   }
 
+  /**
+   * Set the total for all ACME accounts
+   */
   updateTotalACMEBalance (): void {
     this.totalACMEBalance = 0
     this.accounts.forEach(account => this.totalACMEBalance += account.balance)
