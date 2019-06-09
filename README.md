@@ -25,7 +25,7 @@ This configuration includes dev logs, production logs are disabled in evironment
 http://localhost:4200/
 ```
 
-## NB - this app depeneds on the below express service
+### NB - this app depends on the below express service on port:8080
 ### Run Server
 ``` nodejs
 https://github.com/cibfrontend/mock-api-server

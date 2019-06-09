@@ -1,0 +1,20 @@
+.withdrawDropDown {
+  button {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.02rem;
+  }
+
+  .dropdown-toggle::after {
+    display:none;
+  }
+
+  .ng-invalid:not(form)  {
+    border: 1px solid red;
+
+    &:focus {
+      outline:0 !important;
+      -webkit-appearance:none;
+    }
+  }
+}
