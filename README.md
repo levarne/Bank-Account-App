@@ -15,7 +15,7 @@ $ npm install
 
 ### run project
 ```sh 
-$ npm run serve
+$ npm run start
 This will start a dev server in development mode.
 This configuration includes dev logs, production logs are disabled in evironment.production.ts
 ```
