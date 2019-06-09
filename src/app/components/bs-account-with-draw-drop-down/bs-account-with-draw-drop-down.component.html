@@ -1,0 +1,21 @@
+<div class="d-inline-block withdrawDropDown" ngbDropdown>
+  <button type="button"
+          class="btn btn-success mr-2"
+          ngbDropdownToggle
+          [disabled]="account.balance <= account.minBalance">
+    Withdraw
+  </button>
+  <div ngbDropdownMenu class="px-2">
+    <input  type="number" placeholder="0" #withdrawAmount
+            [ngClass]="{'ng-invalid': (account.balance - withdrawAmount.value) < account.minBalance}"
+            (change)="0"
+            (keyup)="0"
+    />
+    <button
+      class="btn-block mt-1"
+      (click)="onWithdraw(account, withdrawAmount.value);withdrawAmount.value=''"
+      (keydown)="onWithdraw(account, withdrawAmount.value);withdrawAmount.value=''"
+      [disabled]="withdrawAmount.value <= 0"
+    >OK</button>
+  </div>
+</div>
